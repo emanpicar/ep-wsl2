@@ -1,28 +1,32 @@
-#### Steps
-- Install WSL2
-    - wsl2 windows setup
-    - docker-desktop and kubernetes setup
-- Install language version managers
-   - gvm
-      - `bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)`
-      - `source /home/epicar/.gvm/scripts/gvm`
-   - nvm
-      - `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash`
-   - pyenv
-      - `brew update`
-      - `brew install pyenv`
-- Install direnv
-   - `curl -sfL https://direnv.net/install.sh | bash`
+# WSL 2 Subsystem dev environment setup
 
-#### Optional setup
- - VSCode multiple environment setup
- - VSCode plugins
-    - [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
-    - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
-    - [Bookmarks](https://marketplace.visualstudio.com/items?itemName=alefragnani.Bookmarks)
+This repository contains information on how I setup my dev landscape in Windows OS. Everyone is welcome to use this however they want
 
+<hr />
 
+## Application Setup
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+### Install Windows WSL2
+1. Search "Turn Windows features on or off"
+   1. Check Windows Subsystem for Linux
+   1. Check Virtual Machine Platform
+1. Open PowerShell
+   1. wsl --set-default-version 2
+   1. download wsl2 driver if needed https://aka.ms/wsl2
+   1. update wsl2 kernell if needed https://aka.ms/wsl2kernel
+1. Go to Microsoft Store
+   1. Install Ubuntu LTS
+
+### Install Docker Desktop with Kubernetes
+
+1. Install Docker Desktop
+   1. https://docs.docker.com/desktop/install/windows-install/
+   1. enable Hyper-V WSL2 during installation
+1. Enable Kubernetes
+   1. Go to Settings
+   1. Resources > WSL integration > Tick Ubuntu
+   1. Kubernetes > Tick Enable Kubernetes
+
+## DevTools Setup
+1. Install language version managers and direnv
+   1. execute `bash scripts/ubuntu-devtools.sh`

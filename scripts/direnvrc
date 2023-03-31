@@ -1,0 +1,20 @@
+use_go() {
+    local version=$1
+
+    source ~/.gvm/scripts/gvm
+
+    # gvm use is failing but adding the source gvm command fixes it
+    gvm use $version
+}
+
+use_nvm() {
+    local version=$1
+
+    . ~/.nvm/nvm.sh use $version
+}
+
+use_python() {
+    local version=$1
+
+    pyenv local $version
+}
