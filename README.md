@@ -51,3 +51,8 @@ This repository contains information on how I setup my dev landscape in Windows 
 1. `nvm ls-remote`
 1. `nvm install v19.8.1`
 1. `nvm use v19.8.1`
+
+<hr />
+
+## Direnv Usage
+1. `cd examples/ && direnv allow`
