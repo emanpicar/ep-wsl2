@@ -30,8 +30,12 @@ This repository contains information on how I setup my dev landscape in Windows 
 <hr />
 
 ## DevTools Setup
-1. Install language version managers and direnv
-   1. execute `bash scripts/ubuntu-devtools.sh`
+1. execute `bash scripts/ubuntu-devtools.sh`
+   1. Installs language version managers and direnv
+   1. Installs istio and terraform cli
+   1. Installed files are located in `$HOME/installed`
+1. execute `bash scripts/install-status.sh`
+   1. Prints all the information related to the installation process
 
 <hr />
 

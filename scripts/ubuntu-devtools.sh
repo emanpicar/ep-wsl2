@@ -32,13 +32,11 @@ function install_go {
 }
 
 function install_python {
-    
-
     sudo apt-get install python3.6 -y
 }
 
 function install_gvm {
-    rm -rf ~/.gvm
+    sudo rm -rf ~/.gvm
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
     source ~/.gvm/scripts/gvm
     gvm version
@@ -73,6 +71,41 @@ function install_direnv {
     cp scripts/direnvrc ~/.config/direnv/direnvrc
 }
 
+function install_istioctl {
+    rm -rf installed
+    mkdir -p installed
+    cd installed
+
+    istioctl_version=1.17.2
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=$istioctl_version TARGET_ARCH=x86_64 sh -
+    cd istio-$istioctl_version
+
+    if [[ -z "$(command -v istioctl)" ]]; then
+        echo "export PATH=$PWD/bin:\$PATH" >> ~/.bashrc
+    fi
+
+    cd ../.. # return to original workdir
+}
+
+function install_terraform {
+    sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+
+    wget -O- https://apt.releases.hashicorp.com/gpg | \
+    gpg --dearmor | \
+    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+    # gpg --no-default-keyring \
+    # --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+    # --fingerprint
+
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+    https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+    sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+    sudo apt update
+    sudo apt-get install terraform
+}
+
 function print_info {
     echo ""
     echo "#######################################"
@@ -95,4 +128,6 @@ install_gvm
 install_nvm
 install_pyenv
 install_direnv
+install_istioctl
+install_terraform
 print_info
